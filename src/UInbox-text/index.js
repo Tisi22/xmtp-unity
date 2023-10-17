@@ -72,11 +72,14 @@ export function UInbox({ wallet, env }) {
     }
     console.log("entra7");
     let address = await getAddress(signer);
+    console.log(address);
     let keys = loadKeys(address);
     const clientOptions = {
       env: env ? env : getEnv(),
     };
+    console.log(keys);
     if (!keys) {
+      console.log("entra8");
       keys = await Client.getKeys(signer, {
         ...clientOptions,
         // we don't need to publish the contact here since it
@@ -86,6 +89,7 @@ export function UInbox({ wallet, env }) {
         // instance
         persistConversations: false,
       });
+      console.log("entra9");
       storeKeys(address, keys);
     }
     const xmtp = await Client.create(null, {
@@ -104,11 +108,25 @@ export function UInbox({ wallet, env }) {
   const closeWidget = () => {
     setIsOpen(false);
   };
+
+  const openWidgetUnity = (_signer) => {
+    setSigner(_signer);
+    setIsConnected(true);
+    setIsOpen(true);
+  };
+
   // Define uinbox object for global access
   window.uinbox = {
+    open: (SignerAddress) => {
+      openWidgetUnity (SignerAddress) },
+    close: closeWidget,
+  }; 
+
+  // Define uinbox object for global access
+  /*window.uinbox = {
     open: openWidget,
     close: closeWidget,
-  };
+  };*/
   // Logout function to reset all states and clear local storage
   const handleLogout = async () => {
     setIsConnected(false);
