@@ -63,7 +63,7 @@ const InboxPageUnity = () => {
 
   return (
     <>
-      <Unity unityProvider={unityProvider} style={{ width: 1100, height: 700 }} />
+      <Unity unityProvider={unityProvider} style={{ width: 1300, height: 700 }} />
       
       {/* Include the JSX element directly when 'signer' is available */}
       {signer && walletConnected && <UInbox env={process.env.REACT_APP_XMTP_ENV} wallet={signer} />}

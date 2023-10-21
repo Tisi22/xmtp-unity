@@ -6,7 +6,7 @@ document.body.appendChild(Object.assign(document.createElement("script"), { type
 //document.body.appendChild(Object.assign(document.createElement("script"), { type: "text/javascript", src: "https://unpkg.com/@web3modal/ethereum@2.7.1/dist/cdn/bundle-b2289479.js" }));
 
 // load web3js to create transactions
-document.body.appendChild(Object.assign(document.createElement("script"), { type: "text/javascript", src: "./web3/lib/web3.min.js" }));
+//document.body.appendChild(Object.assign(document.createElement("script"), { type: "text/javascript", src: "./web3/lib/web3.min.js" }));
 // uncomment to enable torus wallet
 //document.body.appendChild(Object.assign(document.createElement("script"), { type: "text/javascript", src: "https://cdn.jsdelivr.net/npm/@toruslabs/torus-embed" }));
 // uncomment to enable walletconnect with metamask
@@ -148,7 +148,7 @@ let web3;
 //HERE WALLET CONNECT WITH ETHERS----------------------------------------------------------------------------------------
 
 
-async function connect() {
+/*async function connect() {
   alert("Ready just wait a few seconds after dismissing this Alert");
     var EthereumProvider =
       window["@walletconnect/ethereum-provider"].EthereumProvider;
@@ -192,61 +192,23 @@ async function connect() {
       return null;
     }
 
-}
+}*/
 
 //HERE WALLET CONNECT WITH WEB3 -----------------------------------------
 
-/*async function connect() {
-  alert("Ready just wait a few seconds after dismissing this Alert");
-    var EthereumProvider =
-      window["@walletconnect/ethereum-provider"].EthereumProvider;
-    var provider = new EthereumProvider();
-    console.log(provider);
+async function connect(key) {
+  console.log("this is the key", key);
 
-    try {
-      await provider.initialize({
-        rpc: {
-          5: "https://rpc.ankr.com/eth_goerli",
-          43113: "https://rpc.ankr.com/avalanche fuji",
-          80001: "https://rpc-mumbai.maticvigil.com",
-          11155111: "https://rpc.nepolia.org",
-        },
-        projectId: "7bd7cdfe2cc7ac9f076e1a2abdd859ef",
-        chains: [5],
-        metadata: {
-          name: "Arculus",
-          description: "Connect to Ethereum using Wallet Connect",
-          url: "http://0.0.0.0:8000/",
-          icons: ["static/images/arculus.svg"],
-        },
-        showQrModal: true,
-      });
+  const provider = new ethers.providers.JsonRpcProvider('https://endpoints.omniatech.io/v1/matic/mumbai/public'); 
+  const wallet = new ethers.Wallet(key, provider);
+  console.log(wallet);
+  web3gl.signer = wallet;
+  console.log(web3gl.signer);
+  var address = await wallet.getAddress();
+  console.log(address);
 
+}
 
-      window.onunhandledrejection = async function (evt) {
-        alert(evt.reason.message);
-      };
-
-      await provider.connect();
-
-      var signer = provider.signer;
-
-      web3 = new Web3(provider);
-
-      
-      var signer = (await web3.eth.getAccounts())[0];
-    
-      web3gl.signer = await signer;
-      web3gl.connectAccount = await signer;
-
-      console.log("Signer:", window.web3gl.signer);
-    } catch (error) {
-      console.log(error);
-      alert("Provider not connected");
-      return null;
-    }
-
-}*/
 
 /*
 Will calculate the sha3 of the input.
