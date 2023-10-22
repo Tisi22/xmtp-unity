@@ -11,10 +11,10 @@ const InboxPageUnity = () => {
   //UNITY
   const { unityProvider, addEventListener, removeEventListener } =
   useUnityContext({
-    loaderUrl: "Build/Test.loader.js",
-    dataUrl: "Build/Test.data",
-    frameworkUrl: "Build/Test.framework.js",
-    codeUrl: "Build/Test.wasm",
+    loaderUrl: "Build/FinalVersion.loader.js",
+    dataUrl: "Build/FinalVersion.data",
+    frameworkUrl: "Build/FinalVersion.framework.js",
+    codeUrl: "Build/FinalVersion.wasm",
   });
    
   const getAddress = async (signer) => {
